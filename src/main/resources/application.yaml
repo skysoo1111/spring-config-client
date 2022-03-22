@@ -24,7 +24,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh
+        include: refresh, health, info
 
 mybatis: # type을 쉽게 쓰기 위해서 dto 패키지를 type-aliaes에 설정
   type-aliases-package: com.study.springconfigclient.domain
