@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: config-dev
+  config:
+    activate:
+      on-profile: "dev"
+      devtools:
+        livereload:
+          enabled: false
+        restart:
+          enabled: false

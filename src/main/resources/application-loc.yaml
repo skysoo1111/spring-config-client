@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: config-loc
+  config:
+    activate:
+      on-profile: "loc"
+      devtools:
+        livereload:
+          enabled: false
+        restart:
+          enabled: false

@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: config-real
+  config:
+    activate:
+      on-profile: "real"
+      devtools:
+        livereload:
+          enabled: false
+        restart:
+          enabled: false
