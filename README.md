@@ -1,5 +1,15 @@
 # spring-config-client 설정
 
+## 0. Tech Spec
+|항목|내용|
+|---|---|
+|Java|JDK 11|
+|Framework|SpringBoot 2.6.4|
+|Build Tool|Gradle 7.4.1|
+|Database|MySQL 8.0.28|
+|ORM|JPA, Mybatis 3.5.6|
+|API Docs|Rest Docs|
+
 ## 1. spring cloud config server 의 config 읽어오기
 
 1. application.yml 파일

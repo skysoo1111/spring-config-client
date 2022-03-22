@@ -1,7 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.6.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'org.asciidoctor.convert' version '1.5.8'
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
     id 'java'
 }
 
@@ -20,12 +20,25 @@ repositories {
 }
 
 ext {
-    set('snippetsDir', file("build/generated-snippets"))
+    set('snippetsDir', file("build/generated-snippets")) // 생성된 스니펫의 저장 위치
     set('springCloudVersion', "2021.0.1")
     // version 관리
     spring_version = "2.6.4"
     swagger_version = "3.0.0"
     mybatis_version = "2.2.2"
+}
+
+asciidoctor {
+    inputs.dir snippetsDir
+    dependsOn test
+}
+
+bootJar {
+    dependsOn asciidoctor
+    copy {
+        from "${asciidoctor.outputDir}"
+        into 'BOOT-INF/classes/static/docs'
+    }
 }
 
 dependencies {
@@ -56,12 +69,31 @@ dependencyManagement {
     }
 }
 
-tasks.named('test') {
+test {
     outputs.dir snippetsDir
+    useJUnitPlatform()
+}
+
+asciidoctor.doFirst {
+    delete file('src/main/resources/static/docs')
+}
+
+task copyDocument(type: Copy) {
+    dependsOn asciidoctor
+    from file("build/docs/asciidoc")
+    into file("src/main/resources/static/docs")
+}
+
+tasks.named('test') {
+    outputs.dir snippetsDir // test task의 아웃풋 경로를 스니펫 저장 위치로 설정
     useJUnitPlatform()
 }
 
 tasks.named('asciidoctor') {
     inputs.dir snippetsDir
     dependsOn test
+}
+
+build {
+    dependsOn copyDocument
 }
