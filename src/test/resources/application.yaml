@@ -25,15 +25,7 @@ management:
     web:
       exposure:
         include: refresh, health, info
-  endpoint:
-    refresh:
-      enabled: true
 
-# MyBatis
-# 자바 변수는 noticeYn, 컬럼은 notice_yn이다.
-# 구분되는 단어의 앞 글자만 대문자로 처리하는 카멜케이스 설정을 해서, 자동 매핑되도록 함.
 mybatis: # type을 쉽게 쓰기 위해서 dto 패키지를 type-aliaes에 설정
-  configuration:
-    map-underscore-to-camel-case: true
   type-aliases-package: com.study.springconfigclient.domain
   mapper-locations: /mappers/*.xml

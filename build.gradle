@@ -28,19 +28,6 @@ ext {
     mybatis_version = "2.2.2"
 }
 
-asciidoctor {
-    inputs.dir snippetsDir
-    dependsOn test
-}
-
-bootJar {
-    dependsOn asciidoctor
-    copy {
-        from "${asciidoctor.outputDir}"
-        into 'BOOT-INF/classes/static/docs'
-    }
-}
-
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
@@ -53,11 +40,13 @@ dependencies {
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     //DB
     implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:$mybatis_version"
-    compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
     testImplementation 'org.springframework.security:spring-security-test'
@@ -69,9 +58,23 @@ dependencyManagement {
     }
 }
 
-test {
-    outputs.dir snippetsDir
+tasks.named('test') {
+    outputs.dir snippetsDir // test task의 아웃풋 경로를 스니펫 저장 위치로 설정
     useJUnitPlatform()
+}
+
+tasks.named('asciidoctor') {
+    inputs.dir snippetsDir
+    dependsOn test
+
+}
+
+bootJar {
+    dependsOn asciidoctor
+    copy {
+        from "${asciidoctor.outputDir}"
+        into 'BOOT-INF/classes/static/docs'
+    }
 }
 
 asciidoctor.doFirst {
@@ -82,16 +85,6 @@ task copyDocument(type: Copy) {
     dependsOn asciidoctor
     from file("build/docs/asciidoc")
     into file("src/main/resources/static/docs")
-}
-
-tasks.named('test') {
-    outputs.dir snippetsDir // test task의 아웃풋 경로를 스니펫 저장 위치로 설정
-    useJUnitPlatform()
-}
-
-tasks.named('asciidoctor') {
-    inputs.dir snippetsDir
-    dependsOn test
 }
 
 build {
