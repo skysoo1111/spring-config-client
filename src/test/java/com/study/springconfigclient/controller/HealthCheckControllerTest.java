@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationExtension;
@@ -23,21 +24,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ActiveProfiles("dev")
-@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
+@ExtendWith({RestDocumentationExtension.class})
 @AutoConfigureRestDocs
-@SpringBootTest
-@AutoConfigureMockMvc
+@WebMvcTest(HealthCheckController.class)
 class HealthCheckControllerTest {
     @Autowired
     private MockMvc mockMvc;
-//    private MockMvc mockMvc;
-//
-//    @BeforeEach
-//    public void setUp(WebApplicationContext webApplicationContext,
-//                      RestDocumentationContextProvider restDocumentation) {
-//        this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-//                .apply(documentationConfiguration(restDocumentation)).build();
-//    }
 
     @Test
     public void Health_테스트() throws Exception {

@@ -1,6 +1,7 @@
 spring:
   application:
-    name: config
+#    name: config
+    name: gaia-meta-service
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:loc}
     group:
@@ -8,7 +9,8 @@ spring:
       "dev": "dev"
       "real": "real"
   config:
-    import: "optional:configserver:http://localhost:8088"
+    import: "optional:configserver:http://localhost:8888"
+#    import: "optional:configserver:http://localhost:8088"
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher

@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   public void configure(WebSecurity web) throws Exception {
     web.ignoring().antMatchers("/v2/api-docs", "/swagger-resources/**",
-        "/swagger-ui.html", "/swagger-ui/**", "/webjars/**", "/swagger/**");
+        "/swagger-ui.html", "/swagger-ui/**", "/webjars/**", "/swagger/**", "/docs/**");
   }
 
   @Override
@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/webjars/**" ,
             /*Probably not needed*/ "/swagger.json").permitAll()
         .antMatchers("/*/signin", "/*/signin/**", "/*/signup", "/*/signup/**", "/view/**").permitAll() // 가입 및 인증 주소는 누구나 접근가능
-        .antMatchers(HttpMethod.GET, "/exception/**","main-boards/**", "/actuator/health", "/docs", "/healthcheck/**").permitAll(); // 등록된 GET요청 리소스는 누구나 접근가능
+        .antMatchers(HttpMethod.GET, "/exception/**","main-boards/**", "/actuator/health", "/docs/**", "/healthcheck/**").permitAll(); // 등록된 GET요청 리소스는 누구나 접근가능
   }
 
   @Bean
