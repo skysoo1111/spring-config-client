@@ -1,16 +1,16 @@
-package com.study.springconfigclient.controller;//package com.tving.manager.controller;
+package com.study.springconfigclient.controller;//package com.test.manager.controller;
 //
-//import com.tving.manager.domain.Member;
-//import com.tving.manager.mapper.MemberMapper;
-//import com.tving.manager.service.MemberService;
+//import com.test.manager.domain.Member;
+//import com.test.manager.mapper.MemberMapper;
+//import com.test.manager.service.MemberService;
 //import io.swagger.annotations.Api;
 //import io.swagger.annotations.ApiOperation;
 //import io.swagger.annotations.ApiParam;
 //import lombok.RequiredArgsConstructor;
 //import lombok.extern.slf4j.Slf4j;
-//import net.tving.common.dto.CommonResponse;
-//import net.tving.common.dto.Response;
-//import net.tving.common.exception.TvingException;
+//import net.test.common.dto.CommonResponse;
+//import net.test.common.dto.Response;
+//import net.test.common.exception.TestException;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.web.bind.annotation.*;
 //
@@ -34,7 +34,7 @@ package com.study.springconfigclient.controller;//package com.tving.manager.cont
 //                                          HttpServletRequest request) {
 //        Member member = memberMapper.findByUid(uid);
 //        if (!passwordEncoder.matches(password, member.getPassword()))
-//            throw new TvingException("PASSWORD NOT MATCHES");
+//            throw new TestException("PASSWORD NOT MATCHES");
 //
 //        log.info("##### user.getId() : {}",member.getId());
 //        return member;
