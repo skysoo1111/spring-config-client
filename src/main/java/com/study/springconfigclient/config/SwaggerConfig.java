@@ -1,4 +1,4 @@
-package com.study.springconfigclient.config;//package com.tving.manager.config;
+package com.study.springconfigclient.config;//package com.test.manager.config;
 //
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
@@ -26,7 +26,7 @@ package com.study.springconfigclient.config;//package com.tving.manager.config;
 //                .consumes(getConsumeContentTypes())
 //                .produces(getProduceContentType())
 //                .select()
-//                .apis(RequestHandlerSelectors.basePackage("com.tving.manager.controller"))
+//                .apis(RequestHandlerSelectors.basePackage("com.test.manager.controller"))
 //                .paths(PathSelectors.any())
 //                .build()
 //                .apiInfo(swaggerInfo());
